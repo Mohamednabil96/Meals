@@ -2,22 +2,31 @@
   box-sizing: border-box;
   font-family: 'Segoe UI Light', Tahoma, Geneva, Verdana, sans-serif;
 }
-body,
-html { 
-background-color: #000;
-height: 100%;
-width: 100%;
+body,html { 
 overflow-x: hidden;
-
+background-color: #000;
 }
-.nav .open > a, 
-.nav .open > a:hover, 
-.nav .open > a:focus {background-color: transparent;}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+background-color: transparent;
+}
+.header-title{
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-weight: 800;
+font-size: 3rem;
+color: #fbc911;
+}
+.header-text {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+ font-weight: 500;
+ font-size: 1.5rem;
+}
 
-
-/*-------------------------------*/
-/*           Wrappers            */
-/*-------------------------------*/
+.search-header-text {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 200;
+  font-size: 1.25rem;
+}
+/*  Wrappers */
 
 #wrapper {
     padding-left: 0;
@@ -55,7 +64,11 @@ overflow-x: hidden;
 }
 
 #page-content-wrapper {
+  position: relative;
     width: 100%;
+    overflow-x: hidden;
+    background-position: center center;
+    background-size: cover;
 }
 
 
@@ -64,9 +77,8 @@ overflow-x: hidden;
     margin-right: -220px;
 }
 
-/*-------------------------------*/
-/*     Sidebar nav styles        */
-/*-------------------------------*/
+/* Sidebar nav styles */
+
 .navbar {
   padding: 0;
 }
@@ -88,29 +100,26 @@ overflow-x: hidden;
 }
 
 .sidebar-nav li:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    height: 100%;
-    width: 3px;
-    background-color: #1a1a1a;
-    -webkit-transition: width .2s ease-in;
-      -moz-transition:  width .2s ease-in;
-       -ms-transition:  width .2s ease-in;
-            transition: width .2s ease-in;
-
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 3px;
+  background-color: #1a1a1a;
+  -webkit-transition: width .2s ease-in;
+  -moz-transition:  width .2s ease-in;
+  -ms-transition:  width .2s ease-in;
+  transition: width .2s ease-in;
 }
 
-.sidebar-nav li:hover:before,
-.sidebar-nav li.open:hover:before {
-    width: 100%;
-    -webkit-transition: width .2s ease-in;
-      -moz-transition:  width .2s ease-in;
-       -ms-transition:  width .2s ease-in;
-            transition: width .2s ease-in;
-
+.sidebar-nav li:hover:before, .sidebar-nav li.open:hover:before {
+  width: 100%;
+  -webkit-transition: width .2s ease-in;
+  -moz-transition:  width .2s ease-in;
+  -ms-transition:  width .2s ease-in;
+  transition: width .2s ease-in;
 }
 
 .sidebar-nav li a {
@@ -120,12 +129,7 @@ overflow-x: hidden;
     padding: 10px 15px 10px 30px;    
 }
 
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus{
+.sidebar-nav li a:hover,.sidebar-nav li a:active, .sidebar-nav li a:focus, .sidebar-nav li.open a:hover, .sidebar-nav li.open a:active, .sidebar-nav li.open a:focus{
     color: #fff;
     text-decoration: none;
     background-color: transparent;
@@ -142,12 +146,10 @@ overflow-x: hidden;
     position: relative;
     background:#212529;
    padding-top: 1em;
-
 }
 .sidebar-brand a {
     color: #ddd;
     text-decoration: none;
-
 }
 
 .img-section img{
@@ -159,10 +161,10 @@ margin-top: 30px;
 
 .bar {
   z-index: 100;
-    position: fixed;
-    left: 0px;
-    height: 100%;
-    transition: all 0.5s ease;
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  transition: all 0.5s ease;
 }
 .outter-nav-social-icon {
     margin-left: 23px;
@@ -178,9 +180,7 @@ position: absolute;
 bottom: 10%;
 }
 
-
 /*       Hamburger-Cross         */
-/*-------------------------------*/
 
 .hamburger {
   position: fixed;
@@ -192,13 +192,11 @@ bottom: 10%;
   margin-left: 15px;
   background: transparent;
   border: none;
-
 }
-.hamburger:hover,
-.hamburger:focus,
-.hamburger:active {
+.hamburger:hover, .hamburger:focus, .hamburger:active {
   outline: none;
 }
+
 .hamburger.is-closed:before {
   content: '';
   display: block;
@@ -218,20 +216,13 @@ bottom: 10%;
   -webkit-transition: all .35s ease-in-out;
 }
 
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom,
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
+.hamburger.is-closed .hamb-top, .hamburger.is-closed .hamb-middle, .hamburger.is-closed .hamb-bottom, .hamburger.is-open .hamb-top, .hamburger.is-open .hamb-middle, .hamburger.is-open .hamb-bottom {
   position: absolute;
   left: 0;
   height: 4px;
   width: 100%;
 }
-.hamburger.is-closed .hamb-top,
-.hamburger.is-closed .hamb-middle,
-.hamburger.is-closed .hamb-bottom {
+.hamburger.is-closed .hamb-top, .hamburger.is-closed .hamb-middle, .hamburger.is-closed .hamb-bottom {
   background-color: #1a1a1a;
 }
 .hamburger.is-closed .hamb-top { 
@@ -255,13 +246,10 @@ bottom: 10%;
   bottom: 0;
   -webkit-transition: all .35s ease-in-out;
 }
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-middle,
-.hamburger.is-open .hamb-bottom {
+.hamburger.is-open .hamb-top,.hamburger.is-open .hamb-middle, .hamburger.is-open .hamb-bottom {
   background-color: #1a1a1a;
 }
-.hamburger.is-open .hamb-top,
-.hamburger.is-open .hamb-bottom {
+.hamburger.is-open .hamb-top, .hamburger.is-open .hamb-bottom {
   top: 50%;
   margin-top: -2px;  
 }
@@ -293,9 +281,7 @@ bottom: 10%;
   -webkit-transition: all .35s ease-in-out;
 }
 
-/*-------------------------------*/
-/*            Overlay            */
-/*-------------------------------*/
+/* Overlay */
 
 .loading-screen {
     position: fixed;
@@ -308,13 +294,26 @@ bottom: 10%;
     z-index: 1031;
 }
 
-/* HOOOOOOOMMMMEEEEEEEE */
+/* HOMe */
+#displayedWrapper{
+  background-position: center center;
+  background-size: cover;
+}
 
+.overlay-home {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0px;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
+}
 .meal-box , .category-box , .area-box, .ingredients-box{
   box-shadow: 0 .5rem 2rem rgba(255,255,255,.025)!important;
   cursor: pointer;
   overflow: hidden;
-
 }
 
 .ingredients-box .card {
@@ -340,7 +339,6 @@ bottom: 10%;
 top: 0;
 }
 
-
 #mealRecipes li, .meal-tags {
   list-style-type: none;
 }
@@ -356,4 +354,6 @@ top: 0;
 }
 #submitBtn {
   cursor: pointer;
+  background-color: #fbc911;
+  color: black;
 }

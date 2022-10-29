@@ -1,47 +1,40 @@
-// V A R I A B L E S   S T A R T
 let arr = [];
-let nvWidth = 0;
-let  isTrue = !0;
-var isSearchTrue = !0;
-var displayedData = document.getElementById("displayedData");
+let displayedData = document.getElementById("displayedData");
+let headerDesc = document.getElementById("headerDesc")
 
 // N A V B A R   T O G G L E    S T A R T  //
 $(document).ready(function () {
-    var trigger = $('.hamburger'),
-        overlay = $('.overlay'),
-       isClosed = false;
+let trigger = $('.hamburger'),
+    overlay = $('.overlay'),
+    isClosed = false;
   
-      trigger.click(function () {
-        hamburger_cross();    
-        AOS.init();
-      });
+trigger.click(function () {
+hamburger_cross();    
+AOS.init();
+});
   
-      function hamburger_cross() {
-  
-        if (isClosed == true) {          
-          overlay.hide();
-          trigger.removeClass('is-open');
-          trigger.addClass('is-closed');
-          isClosed = false;
-          $(".bar").css("left","0")
-        } else {   
-        AOS.init();
-          overlay.show();
-          trigger.removeClass('is-closed');
-          trigger.addClass('is-open');
-          isClosed = true;
-          $(".bar").css("left", "220px")
-        }
-    }
+function hamburger_cross() { 
+if (isClosed == true) {          
+overlay.hide();
+trigger.removeClass('is-open');
+trigger.addClass('is-closed');
+isClosed = false;
+$(".bar").css("left","0")
+} else {   
+AOS.init();
+overlay.show();
+trigger.removeClass('is-closed');
+trigger.addClass('is-open');
+isClosed = true;
+$(".bar").css("left", "220px")
+}
+}
     
-    $('[data-toggle="offcanvas"]').click(function () {
-          $('#wrapper').toggleClass('toggled');
+$('[data-toggle="offcanvas"]').click(function () {
+     $('#wrapper').toggleClass('toggled');
+});  
 
-    });  
-
-
-
-  });
+});
 // N A V B A R   T O G G L E   E N D //
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -55,9 +48,15 @@ meal("").then(() => {
 
 function displayMeals(arr) {
 let cartona = ""
+let description = ""
+description += `
+<h1 class="row text-center justify-content-center mt-3 ms-5 me-1 header-title">
+YUMMY
+</h1>
+`
 for (let i = 0; i < arr.length; i++) {
-      cartona += `
-      <div class="col-md-6 col-lg-3 mt-4 px-4 meal-box">
+cartona += `
+      <div class="col-md-6 col-lg-3 my-3 px-4 meal-box">
           <div onclick="getMeal('${arr[i].idMeal}')" class="rounded position-relative">
               <div class="card border-0">
                   <img src='${arr[i].strMealThumb}' class="w-100 rounded" />
@@ -71,6 +70,7 @@ for (let i = 0; i < arr.length; i++) {
       </div>`
 }
 displayedData.innerHTML = cartona
+headerDesc.innerHTML = description
 } // ALL 21 MEALS DISPLAYED
 
 function displayMeal(meal) {
@@ -95,10 +95,10 @@ for (let i = 0; i < tags.length; i++) {
 
 let cartona = `
   <div class="col-md-4 meal-box text-white">
-        <img class="w-100 my-5" src="${meal.strMealThumb}">
+        <img class="w-100 my-3 rounded" src="${meal.strMealThumb}">
         <h1>${meal.strMeal}</h1>
   </div>
-      <div class="col-md-8 meal-box text-white text-start my-5">
+  <div class="col-md-8 meal-box text-white text-start my-3">
         <h2>Instructions</h2>
         <p>${meal.strInstructions}</p>
         <p><b class="fw-bolder">Area :</b> ${meal.strArea}</p>
@@ -113,14 +113,14 @@ let cartona = `
         <h3 class="my-2 mx-1 p-1">Tags :</h3>
         <ul class="d-flex" id="tags">
         </ul>
-
-        
+    
         <a class="btn btn-success text-white ms-4" target="_blank" href="${meal.strSource}">Source</a>
         <a class="btn btn-danger text-white" target="_blank" href="${meal.strYoutube}">Youtube</a>
-      </div>`
-  displayedData.innerHTML = cartona
-  document.getElementById("mealRecipes").innerHTML = mealRecipes
-  document.getElementById("tags").innerHTML = tagsStr
+    </div>
+    `
+displayedData.innerHTML = cartona
+document.getElementById("mealRecipes").innerHTML = mealRecipes
+document.getElementById("tags").innerHTML = tagsStr
 
 }// For Individual Meal
 
@@ -138,12 +138,14 @@ async function meal(e) {
 }
 // H O M E    F U N C T I O N S    E N D  //
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // C A T E G O R I E S   F U N C T I O N S   S T A RT
 function displayCategories() {
-let cartona = ""
+let cartona = `
+<h2 class="row text-center text-light justify-content-center mb-5 search-header-text">
+CHOOSE A CATEGORY!
+</h2>`
 for (var i = 0; i < arr.length; i++) cartona += `
+
 <div class="col-md-6 col-lg-3 my-3 category-box ">
     <div class="rounded position-relative">
         <div onclick="filterByCategory('${arr[i].strCategory}')" class="card bg-black border-0">
@@ -175,12 +177,12 @@ return meals;
 
 // CATEGORIES FUNCTIONS END
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // AREA FUNCTIONS START
 function displayArea() {
-let cartona = ""
+let cartona = `
+<h2 class="row text-center text-light justify-content-center mb-5 search-header-text">
+CHOOSE AN AREA!
+</h2>`
 for (var i = 0; i < arr.length; i++) cartona += `
 <div class="col-md-6 col-lg-3 mx-2 mb-5 py-4 rounded area-box">
     <div class="rounded position-relative">
@@ -198,7 +200,7 @@ async function getArea() {
   x = await x.json()
   return x;
   
-  }
+}
 
 async function filterByArea(area) {
   let meals = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
@@ -208,13 +210,13 @@ async function filterByArea(area) {
 }
 // AREA FUNCTIONS END
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 // INGREDIENTES FUNCTIONS START
 
 function displayIngredients() {
-let cartona = ""
+let cartona =  `
+<h2 class="row text-center text-light justify-content-center mb-5 search-header-text">
+CHOOSE A MEAL INGREDIENT!
+</h2>`
 for (var i = 0; i < arr.length; i++) cartona += `
   <div class="col-md-6 col-lg-3 my-3 ingredients-box">
       <div onclick="filterByIngredients('${arr[i].strIngredient}')" class="rounded position-relative">
@@ -241,9 +243,6 @@ async function filterByIngredients(ingredients) {
 }
 // INGREDIENTES FUNCTIONS END
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 $(".nav-item a").click(async (e) => {
 let listBy = e.target.getAttribute("href")
 let classedWith = e.target.getAttribute("class")
@@ -252,10 +251,14 @@ displayedData.innerHTML = ""
 
 // S T A R T    S E A R C H    P A G E    
 if (classedWith == "search") {
-$(".loading-screen").fadeIn(100)
+$(".loading-screen").fadeIn(200)
 displayedData.innerHTML = ""
+
 document.getElementById("searchBars").innerHTML = `
-    <div class="row justify-content-center align-items-center">
+<h2 class="row text-center text-white justify-content-center pt-5 ms-5 me-1 search-header-text">
+ENTER A SEARCH TERM TO SEARCH FOR A MEAL!
+</h2>
+    <div class="row justify-content-center align-items-center pt-3">
 	<div class="col-md-6"><input id="searchInput" class="bg-dark border-0 form-control mb-sm-2 mb-md-0 mt-3 text-white" placeholder="Search By Name">
 	</div>
 	<div class="col-md-6">
@@ -278,11 +281,11 @@ $(".loading-screen").fadeOut(500)
 }
 // SEARCH BY NAME
 async function search(q) {
-      let meals = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${q}`)
-      meals = await meals.json()
-      displayMeals(meals.meals)
-      return meals
-  }
+    let meals = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${q}`)
+    meals = await meals.json()
+    displayMeals(meals.meals)
+    return meals
+}
 
 // SEARCH BY ONE LETTER
 async function getByLetter(letter) {
@@ -316,9 +319,7 @@ $(".loading-screen").fadeIn(100)
   displayArea()
 $(".loading-screen").fadeOut(500)
 }
-
  //E N D    A R E A   P A G E
-
  
 // S T A R T    INGREDIENTS    P A G E    
 
@@ -329,23 +330,25 @@ if (classedWith == "ingredients") {
   displayIngredients()
   $(".loading-screen").fadeOut(500)
 }
-
- //E N D    INGREDIENTS   P A G E
-
+//E N D    INGREDIENTS   P A G E
 
 // S T A R T    C O N T A C T    P A G E    
 
 else if (listBy == "#contact") {
 $(".loading-screen").fadeIn(100)
 
-  displayedData.innerHTML = `
-        <section id="contact" class="container myM w-75 mx-auto mb-5 ">
+displayedData.innerHTML = `
+
+        <section id="contact" class="container w-75 mx-auto ">
 		<div class="p-2">
-			<h2 class="text-light mb-5">Contact Us</h2>
-			<div class="row">
+        
+        <h2 class="row text-center text-light justify-content-center mb-5 mt-2 search-header-text">
+        IF YOU WANT TO GET IN TOUCH WITH US, FILL OUT THE CONTACT FORM BELOW.
+        </h2>
+        			<div class="row">
 				<div class="col-md-6 mb-3">
-					<div class="form-group">
-						<input class="form-control bg-dark border-0 shadow " onkeyup="validation()" id="name"
+					<div class="form-group ">
+						<input class="form-control bg-dark border-0 text-white " onkeyup="validation()" id="name"
 							placeholder="Enter Your Name">
 						<div class="alert mt-1 alert-danger d-none" id="namealert" role="alert">
 							Special Characters and Numbers not allowed
@@ -354,7 +357,7 @@ $(".loading-screen").fadeIn(100)
 				</div>
 				<div class="col-md-6 mb-3">
 					<div class="form-group">
-						<input onkeyup="validation()" class="form-control bg-dark border-0" id="email" placeholder="Enter E-mail">
+						<input onkeyup="validation()" class="form-control bg-dark border-0 text-white" id="email" placeholder="Enter E-mail">
 						<div class="alert mt-1 alert-danger d-none" id="emailalert" role="alert">
 							Enter valid email. *Ex: xxx@yyy.zzz
 						</div>
@@ -362,7 +365,7 @@ $(".loading-screen").fadeIn(100)
 				</div>
 				<div class="col-md-6 mb-3">
 					<div class="form-group">
-						<input onkeyup="validation()" class="form-control bg-dark border-0" id="phone" placeholder="Enter phone">
+						<input onkeyup="validation()" class="form-control bg-dark border-0 text-white" id="phone" placeholder="Enter phone">
 						<div class="alert mt-1 alert-danger  d-none" id="phonealert" role="alert">
 							Enter valid Phone Number
 						</div>
@@ -370,7 +373,7 @@ $(".loading-screen").fadeIn(100)
 				</div>
 				<div class="col-md-6 mb-3">
 					<div class="form-group">
-						<input onkeyup="validation()" class="form-control bg-dark border-0" id="age" placeholder="Enter Age">
+						<input onkeyup="validation()" class="form-control bg-dark border-0 text-white" id="age" placeholder="Enter Age">
 						<div class="alert mt-1 alert-danger  d-none" id="agealert" role="alert">
 							Enter valid Age
 						</div>
@@ -378,7 +381,7 @@ $(".loading-screen").fadeIn(100)
 				</div>
 				<div class="col-md-6 mb-3">
 					<div class="form-group">
-						<input onkeyup="validation()" class="form-control bg-dark border-0" type="password" id="password"
+						<input onkeyup="validation()" class="form-control bg-dark border-0 text-white" type="password" id="password"
 							placeholder="Enter Password">
 						<div class="alert mt-1 alert-danger  d-none" id="passwordalert" role="alert">
 							Enter valid password *Minimum eight characters, at least one letter and one number:*
@@ -387,33 +390,30 @@ $(".loading-screen").fadeIn(100)
 				</div>
 				<div class="col-md-6 mb-3">
 					<div class="form-group">
-						<input onkeyup="validation()" class="form-control bg-dark border-0" type="password" id="rePassword"
+						<input onkeyup="validation()" class="form-control bg-dark border-0 text-white" type="password" id="rePassword"
 							placeholder="Enter Repassword">
 						<div class="alert mt-1 alert-danger  d-none" id="repasswordalert" role="alert">
 							Enter valid Repassword
 						</div>
 					</div>
 				</div>
-
-
 			</div>
-
-			<button type="submit" disabled id="submitBtn" class="btn btn-outline-danger mt-2">Submit</button>
+			<button type="submit" disabled id="submitBtn" class="btn mt-2">Submit</button>
 		</div>
 
 	</section>`
-    userName = document.getElementById("name"),
-    userEmail = document.getElementById("email"),
-    userPhone = document.getElementById("phone"),
-    userAge = document.getElementById("age"),
-    userPassword = document.getElementById("password"),
-    userRePassword = document.getElementById("rePassword"),
-    userNameAlert = document.getElementById("namealert"),
-    userEmailAlert = document.getElementById("emailalert"),
-    userPhoneAlert = document.getElementById("phonealert"),
-    userAgeAlert = document.getElementById("agealert"),
-    userpasswordAlert = document.getElementById("passwordalert"),
-    userRepasswordAlert = document.getElementById("repasswordalert");
+userName = document.getElementById("name"),
+userEmail = document.getElementById("email"),
+userPhone = document.getElementById("phone"),
+userAge = document.getElementById("age"),
+userPassword = document.getElementById("password"),
+userRePassword = document.getElementById("rePassword"),
+userNameAlert = document.getElementById("namealert"),
+userEmailAlert = document.getElementById("emailalert"),
+userPhoneAlert = document.getElementById("phonealert"),
+userAgeAlert = document.getElementById("agealert"),
+userpasswordAlert = document.getElementById("passwordalert"),
+userRepasswordAlert = document.getElementById("repasswordalert");
 
 userName.addEventListener("focus", () => {
     nameToached = true
@@ -445,84 +445,83 @@ let nameToached = false,
     repasswordToached = false;
 
 function validation() {
-    if (nameToached) {
-        if (userNameValid()) {
-            userName.classList.remove("is-invalid")
-            userName.classList.add("is-valid")
-            userNameAlert.classList.replace("d-block", "d-none")
-            userNameAlert.classList.replace("d-block", "d-none")
-
-        } else {
-            userName.classList.replace("is-valid", "is-invalid")
-            userNameAlert.classList.replace("d-none", "d-block")
-        }
+if (nameToached) {
+    if (userNameValid()) {
+        userName.classList.remove("is-invalid")
+        userName.classList.add("is-valid")
+        userNameAlert.classList.replace("d-block", "d-none")
+        userNameAlert.classList.replace("d-block", "d-none")
+    } else {
+        userName.classList.replace("is-valid", "is-invalid")
+        userNameAlert.classList.replace("d-none", "d-block")
     }
+}
 
-    if (emailToached) {
-        if (userEmailValid()) {
-            userEmail.classList.remove("is-invalid")
-            userEmail.classList.add("is-valid")
-            userEmailAlert.classList.replace("d-block", "d-none")
-            userEmailAlert.classList.replace("d-block", "d-none")
-        } else {
-            userEmail.classList.replace("is-valid", "is-invalid")
-            userEmailAlert.classList.replace("d-none", "d-block")
-        }
+if (emailToached) {
+    if (userEmailValid()) {
+        userEmail.classList.remove("is-invalid")
+        userEmail.classList.add("is-valid")
+        userEmailAlert.classList.replace("d-block", "d-none")
+        userEmailAlert.classList.replace("d-block", "d-none")
+    } else {
+        userEmail.classList.replace("is-valid", "is-invalid")
+        userEmailAlert.classList.replace("d-none", "d-block")
     }
+}
 
-    if (phoneToached) {
-        if (userPhoneValid()) {
-            userPhone.classList.remove("is-invalid")
-            userPhone.classList.add("is-valid")
-            userPhoneAlert.classList.replace("d-block", "d-none")
-            userPhoneAlert.classList.replace("d-block", "d-none")
-        } else {
-            userPhone.classList.replace("is-valid", "is-invalid")
-            userPhoneAlert.classList.replace("d-none", "d-block")
-        }
-    }
+if (phoneToached) {
+    if (userPhoneValid()) {
+        userPhone.classList.remove("is-invalid")
+        userPhone.classList.add("is-valid")
+        userPhoneAlert.classList.replace("d-block", "d-none")
+        userPhoneAlert.classList.replace("d-block", "d-none")
+} else {
+        userPhone.classList.replace("is-valid", "is-invalid")
+         userPhoneAlert.classList.replace("d-none", "d-block")
+  }
+}
 
-    if (ageToached) {
-        if (userAgeValid()) {
-            userAge.classList.remove("is-invalid")
-            userAge.classList.add("is-valid")
-            userAgeAlert.classList.replace("d-block", "d-none")
-            userAgeAlert.classList.replace("d-block", "d-none")
-        } else {
-            userAge.classList.replace("is-valid", "is-invalid")
-            userAgeAlert.classList.replace("d-none", "d-block")
-        }
+if (ageToached) {
+    if (userAgeValid()) {
+        userAge.classList.remove("is-invalid")
+        userAge.classList.add("is-valid")
+        userAgeAlert.classList.replace("d-block", "d-none")
+        userAgeAlert.classList.replace("d-block", "d-none")
+    } else {
+        userAge.classList.replace("is-valid", "is-invalid")
+        userAgeAlert.classList.replace("d-none", "d-block")
     }
+}
 
-    if (passwordToached) {
-        if (userPasswordValid()) {
-            userPassword.classList.remove("is-invalid")
-            userPassword.classList.add("is-valid")
-            userpasswordAlert.classList.replace("d-block", "d-none")
-            userpasswordAlert.classList.replace("d-block", "d-none")
-        } else {
-            userPassword.classList.replace("is-valid", "is-invalid")
-            userpasswordAlert.classList.replace("d-none", "d-block")
-        }
+if (passwordToached) {
+    if (userPasswordValid()) {
+        userPassword.classList.remove("is-invalid")
+        userPassword.classList.add("is-valid")
+        userpasswordAlert.classList.replace("d-block", "d-none")
+        userpasswordAlert.classList.replace("d-block", "d-none")
+    } else {
+        userPassword.classList.replace("is-valid", "is-invalid")
+        userpasswordAlert.classList.replace("d-none", "d-block")
     }
+}
 
-    if (repasswordToached) {
-        if (userRePasswordValid()) {
-            userRePassword.classList.remove("is-invalid")
-            userRePassword.classList.add("is-valid")
-            userRepasswordAlert.classList.replace("d-block", "d-none")
-            userRepasswordAlert.classList.replace("d-block", "d-none")
-        } else {
-            userRePassword.classList.replace("is-valid", "is-invalid")
-            userRepasswordAlert.classList.replace("d-none", "d-block")
-        }
+if (repasswordToached) {
+    if (userRePasswordValid()) {
+        userRePassword.classList.remove("is-invalid")
+        userRePassword.classList.add("is-valid")
+        userRepasswordAlert.classList.replace("d-block", "d-none")
+        userRepasswordAlert.classList.replace("d-block", "d-none")
+    } else {
+        userRePassword.classList.replace("is-valid", "is-invalid")
+        userRepasswordAlert.classList.replace("d-none", "d-block")
     }
+}
 
-    if(userNameValid() && userEmailValid() && userPhoneValid() && userAgeValid() && userPasswordValid() && userRePasswordValid()){
-        document.getElementById("submitBtn").removeAttribute("disabled")
-    }else{
-        document.getElementById("submitBtn").setAttribute("disabled","true")
-    }
+if(userNameValid() && userEmailValid() && userPhoneValid() && userAgeValid() && userPasswordValid() && userRePasswordValid()){
+    document.getElementById("submitBtn").removeAttribute("disabled")
+}else{
+    document.getElementById("submitBtn").setAttribute("disabled","true")
+}
 
 }
 
@@ -549,5 +548,4 @@ function userPasswordValid() {
 function userRePasswordValid() {
     return userPassword.value == userRePassword.value
 }
-
  //E N D    C O N T A C T   P A G E

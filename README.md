@@ -1,4 +1,4 @@
-Meals
+# Meals
 
 A meal planning and recipe management application designed to help users organize their meals and discover new recipes. 
 
